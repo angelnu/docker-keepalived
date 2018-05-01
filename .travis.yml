@@ -20,12 +20,12 @@ env:
 
 script:
 - if [ "x$TRAVIS_BRANCH" = "master" ]; then export TAG="latest"; else export TAG="devel";fi
-- BUILD=true PUSH=false ./build.sh
+- BUILD=true PUSH=false TAG=$TAG ./build.sh
 - |
   if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     # Push image
     docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-    BUILD=false PUSH=true ./build.sh
+    BUILD=false PUSH=true TAG=$TAG ./build.sh
   fi
 
 jobs:
@@ -39,6 +39,6 @@ jobs:
     - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
     - |
       if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-        ARCHS="arm amd64 arm64" BUILD=false PUSH=false MANIFEST=true ./build.sh
+        ARCHS="arm amd64 arm64" BUILD=false PUSH=false TAG=$TAG MANIFEST=true ./build.sh
       fi
     env:
