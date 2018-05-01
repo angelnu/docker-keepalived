@@ -6,7 +6,7 @@ services:
 addons:
   apt:
     packages:
-      - docker-ce:18:03 #Needed for experimental CLI (manifest)
+      - docker-ce #Needed for experimental CLI (manifest)
 
 language: bash
 
@@ -15,17 +15,17 @@ env:
     # TARGET_IMG  = Base image architecture to be used
     # TARGET_ARCH = qemu binary to be downloaded from https://github.com/multiarch/qemu-user-static/releases
     # TAG         = Tag to be applied to the image when upload to DockerHub
-    - TARGET_IMG=amd64/   TARGET_ARCH=amd64   TAG=amd64
-    - TARGET_IMG=arm64v8/ TARGET_ARCH=aarch64 TAG=arm64
-    - TARGET_IMG=arm32v6/ TARGET_ARCH=arm     TAG=arm
+    - TARGET_IMG=amd64   TARGET_ARCH=amd64   TAG=amd64
+    - TARGET_IMG=arm64v8 TARGET_ARCH=aarch64 TAG=arm64
+    - TARGET_IMG=arm32v6 TARGET_ARCH=arm     TAG=arm
 
 script:
-  - ./build.sh BUILD=true PUSH=false
+  - BUILD=true PUSH=false ./build.sh
   - >
     if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
       # Push image
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-      ./build.sh BUILD=false PUSH=true
+      BUILD=false PUSH=true ./build.sh
     fi
 jobs:
   include:
