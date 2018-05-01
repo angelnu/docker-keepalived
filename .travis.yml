@@ -21,7 +21,7 @@ env:
 
 jobs:
   include:
-    - stage: Manifest
+    - stage: Build
       script:
       - BUILD=true PUSH=false ./build.sh
       - |
