@@ -19,7 +19,7 @@ env:
   - TARGET_IMG=arm32v6 DOCKER_ARCH=arm   QEMU_ARCH=arm
 
 script:
-- if [ "x$TRAVIS_BRANCH" = "master" ]; then export TAG="latest"; else TAG="devel";fi
+- if [ "x$TRAVIS_BRANCH" = "master" ]; then export TAG="latest"; else export TAG="devel";fi
 - BUILD=true PUSH=false ./build.sh
 - |
   if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
@@ -32,7 +32,7 @@ jobs:
   include:
   - stage: Manifest
     script:
-    - if [ "x$TRAVIS_BRANCH" = "master" ]; then export TAG="latest"; else TAG="devel";fi
+    - if [ "x$TRAVIS_BRANCH" = "master" ]; then export TAG="latest"; else export TAG="devel";fi
     - |
       mkdir -p $HOME/.docker
       echo '{"experimental": "enabled"}'>$HOME/.docker/config.json
