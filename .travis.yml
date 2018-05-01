@@ -33,6 +33,6 @@ jobs:
     script:
     - |
       if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
-        BUILD=false PUSH=false MANIFEST=true - ./build.sh
+        BUILD=false PUSH=false MANIFEST=true ./build.sh
       fi
     env:
