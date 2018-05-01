@@ -23,13 +23,12 @@ jobs:
         fi
         
       env:
-       matrix:
-       # TARGET_IMG  = Base image architecture to be used
-       # TARGET_ARCH = qemu binary to be downloaded from https://github.com/multiarch/qemu-user-static/releases
-       # TAG         = Tag to be applied to the image when upload to DockerHub
-       - TARGET_IMG=amd64   TARGET_ARCH=amd64   TAG=amd64
-       - TARGET_IMG=arm64v8 TARGET_ARCH=aarch64 TAG=arm64
-       - TARGET_IMG=arm32v6 TARGET_ARCH=arm     TAG=arm
+      # TARGET_IMG  = Base image architecture to be used
+      # TARGET_ARCH = qemu binary to be downloaded from https://github.com/multiarch/qemu-user-static/releases
+      # TAG         = Tag to be applied to the image when upload to DockerHub
+      - TARGET_IMG=amd64   TARGET_ARCH=amd64   TAG=amd64
+      - TARGET_IMG=arm64v8 TARGET_ARCH=aarch64 TAG=arm64
+      - TARGET_IMG=arm32v6 TARGET_ARCH=arm     TAG=arm
     - stage: Manifest
       script:
         if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
