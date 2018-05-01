@@ -18,7 +18,8 @@ env:
   - TARGET_IMG=amd64   TARGET_ARCH=amd64   TAG=amd64
   - TARGET_IMG=arm64v8 TARGET_ARCH=aarch64 TAG=arm64
   - TARGET_IMG=arm32v6 TARGET_ARCH=arm     TAG=arm
-install:
+
+script:
 - BUILD=true PUSH=false ./build.sh
 - |
   if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
@@ -26,6 +27,7 @@ install:
     docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
     BUILD=false PUSH=true ./build.sh
   fi
+
 jobs:
   include:
   - stage: Manifest
