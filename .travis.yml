@@ -6,7 +6,7 @@ services:
 addons:
   apt:
     packages:
-      - docker-ce #Needed for experimental CLI (manifest)
+      - docker-ce=docker-ce=18.03 #Needed for experimental CLI (manifest)
 
 language: bash
 
@@ -21,7 +21,7 @@ env:
 
 script:
   - BUILD=true PUSH=false ./build.sh
-  - >
+  - |
     if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
       # Push image
       docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
