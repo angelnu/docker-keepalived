@@ -19,19 +19,22 @@ env:
     - TARGET_IMG=arm64v8 TARGET_ARCH=aarch64 TAG=arm64
     - TARGET_IMG=arm32v6 TARGET_ARCH=arm     TAG=arm
 
-script:
-  - BUILD=true PUSH=false ./build.sh
-  - |
-    if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
-      # Push image
-      docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-      BUILD=false PUSH=true ./build.sh
-    fi
 jobs:
   include:
-    - stage: deploy
+    - stage: Manifest
       script:
-        - ./build.sh BUILD=false PUSH=false MANIFEST=true
+      - BUILD=true PUSH=false ./build.sh
+      - |
+        if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
+          # Push image
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+          BUILD=false PUSH=true ./build.sh
+        fi
+    - stage: Manifest
+      script:
+        if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_PULL_REQUEST" == "false" ]; then
+          BUILD=false PUSH=false MANIFEST=true - ./build.sh
+        fi
       env:
         # Overwrite env to avoid running stage for entire
         ARCH=none
