@@ -6,7 +6,7 @@ services:
 addons:
   apt:
     packages:
-      - docker-ce=18.03 #Needed for experimental CLI (manifest)
+      - docker-ce=18.03* #Needed for experimental CLI (manifest)
 
 language: bash
 
