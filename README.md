@@ -1,6 +1,5 @@
 # keepalived
 [![Downloads](https://img.shields.io/docker/pulls/angelnu/keepalived.svg)](https://hub.docker.com/r/angelnu/keepalived/)
-[![Build Status](https://travis-ci.org/angelnu/docker-keepalived.svg?branch=master)](https://travis-ci.org/angelnu/docker-keepalived)
 
 **NOTE**: Archiving this since I moved to K8S Load Balancers/Multus and the [k8s community](https://github.com/k8s-at-home).
 I will not delete it since it was used by others but please notice that I am also dissabling the weekly builds since the trigger docker
